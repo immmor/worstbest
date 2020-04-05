@@ -1,0 +1,474 @@
+<!DOCTYPE html><html><head>
+<meta charset="utf-8">
+<title>Swipe between maps</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<script src="mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet">
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    .mapboxgl-popup {
+max-width: 400px;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+<style>
+    body {
+        overflow: hidden;
+    }
+
+    body * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+<script src="mapbox-gl-compare.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
+<div id="comparison-container">
+    <div id="before" class="map"></div>
+    <div id="after" class="map"></div>
+</div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiaW1tbW9yIiwiYSI6ImNrNmxhYTZvcDA5cTgzZHBkOThxMTl3N2IifQ.St9SZGWOIL04YeKFSuzYBw';
+    var beforeMap = new mapboxgl.Map({
+        container: 'before',
+        style: 'mapbox://styles/immmor/ck8huozyi04tm1ipjd1cbt65k',
+        center: [-119.816907, 52.096881],
+        zoom: 5
+    });
+
+    var afterMap = new mapboxgl.Map({
+        container: 'after',
+        style: 'mapbox://styles/immmor/ck8kxjp6k04mq1iqkcrw22pu9',
+        center: [-119.816907, 52.096881],
+        zoom: 5
+    });
+
+    // A selector or reference to HTML element
+    var container = '#comparison-container';
+
+    var map = new mapboxgl.Compare(beforeMap, afterMap, container, {
+        // Set this to enable comparing two maps by mouse movement:
+        // mousemove: true
+    });
+  
+  
+beforeMap.on('load', function() {
+beforeMap.addSource('places', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Whitewater Ski Resort</strong><p>Temperature: -1.75°C, Winter Snowfall: 358mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-117.296085, 49.492718]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Castle Mountain Ski Resort</strong><p>Temperature: -3.5°C, Winter Snowfall: 250mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-113.844991, 49.552476]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Fernie Ski Resort</strong><p>Temperature: -2.5°C, Winter Snowfall: 225mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-115.085558, 49.462892]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Sunshine Ski Resort</strong><p>Temperature: -5.7°C, Winter Snowfall: 275mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-115.764148, 51.114659]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Lake Louise Ski Resort</strong><p>Temperature: -7.3°C, Winter Snowfall: 380mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-116.179734, 51.441488]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Revelstoke Ski Resort</strong><p>Temperature: -1.4°C, Winter Snowfall: 270mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-118.162987, 50.959314]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Big White Ski Resort</strong><p>Temperature: -2.6°C, Winter Snowfall: 223mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-118.923143, 49.722371]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Sun Peaks Ski Resort</strong><p>Temperature: -2.5°C, Winter Snowfall: 178mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-119.879877, 50.885411]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Hemlock Ski Resort</strong><p>Temperature: 2.2°C, Winter Snowfall: 250mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-121.937961, 49.386539]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Mt. Washington Ski Resort</strong><p>Temperature: 1.5°C, Winter Snowfall: 225mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-125.301745, 49.750052]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Cypress Ski Resort</strong><p>Temperature: 3°C, Winter Snowfall: 113mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-123.203692, 49.395556]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Whistler Ski Resort</strong><p>Temperature: 0°C, Winter Snowfall: 190mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-122.962539, 50.081523]
+}
+}
+]
+}
+});
+ 
+// Add a layer showing the places. 
+beforeMap.addLayer({
+'id': 'places',
+'type': 'symbol',
+'source': 'places',
+'layout': {
+'icon-image': '{icon}-15',
+'icon-allow-overlap': true
+}
+});
+ 
+// Create a popup, but don't add it to the map yet.
+var popup = new mapboxgl.Popup({
+closeButton: false,
+closeOnClick: false
+});
+ 
+beforeMap.on('mouseenter', 'places', function(e) {
+// Change the cursor style as a UI indicator.
+beforeMap.getCanvas().style.cursor = 'pointer';
+ 
+var coordinates = e.features[0].geometry.coordinates.slice();
+var description = e.features[0].properties.description;
+ 
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+}
+ 
+// Populate the popup and set its coordinates
+// based on the feature found.
+popup
+.setLngLat(coordinates)
+.setHTML(description)
+.addTo(beforeMap);
+});
+ 
+beforeMap.on('mouseleave', 'places', function() {
+beforeMap.getCanvas().style.cursor = '';
+popup.remove();
+});
+});
+  
+  
+  
+  
+  
+  
+  
+afterMap.on('load', function() {
+afterMap.addSource('places', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Whitewater Ski Resort</strong><p>Temperature: -4.08°C, Winter Snowfall: 500mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-117.296085, 49.492718]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Castle Mountain Ski Resort</strong><p>Temperature: -5.6°C, Winter Snowfall: 300mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-113.844991, 49.552476]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Fernie Ski Resort</strong><p>Temperature: -4.6°C, Winter Snowfall: 275mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-115.085558, 49.462892]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Sunshine Ski Resort</strong><p>Temperature: -8°C, Winter Snowfall: 305mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-115.764148, 51.114659]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Lake Louise Ski Resort</strong><p>Temperature: -9.5°C, Winter Snowfall: 380mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-116.179734, 51.441488]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Revelstoke Ski Resort</strong><p>Temperature: -3.6°C, Winter Snowfall: 370mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-118.162987, 50.959314]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Big White Ski Resort</strong><p>Temperature: -4.7°C, Winter Snowfall: 275mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-118.923143, 49.722371]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Sun Peaks Ski Resort</strong><p>Temperature: -4.6°C, Winter Snowfall: 250mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-119.879877, 50.885411]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Hemlock Ski Resort</strong><p>Temperature: 0.2°C, Winter Snowfall: 480mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-121.937961, 49.386539]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Mt. Washington Ski Resort</strong><p>Temperature: -0.3°C, Winter Snowfall: 390mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-125.301745, 49.750052]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+"<strong>Cypress Ski Resort</strong><p>Temperature: 1°C, Winter Snowfall: 230mm</p>",
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-123.203692, 49.395556]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Whistler Ski Resort</strong><p>Temperature: -2°C, Winter Snowfall: 325mm</p>',
+'icon': 'theatre'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-122.962539, 50.081523]
+}
+}
+]
+}
+});
+ 
+// Add a layer showing the places. 
+afterMap.addLayer({
+'id': 'places',
+'type': 'symbol',
+'source': 'places',
+'layout': {
+'icon-image': '{icon}-15',
+'icon-allow-overlap': true
+}
+});
+ 
+// Create a popup, but don't add it to the map yet.
+var popup = new mapboxgl.Popup({
+closeButton: false,
+closeOnClick: false
+});
+ 
+afterMap.on('mouseenter', 'places', function(e) {
+// Change the cursor style as a UI indicator.
+afterMap.getCanvas().style.cursor = 'pointer';
+ 
+var coordinates = e.features[0].geometry.coordinates.slice();
+var description = e.features[0].properties.description;
+ 
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+}
+ 
+// Populate the popup and set its coordinates
+// based on the feature found.
+popup
+.setLngLat(coordinates)
+.setHTML(description)
+.addTo(afterMap);
+});
+ 
+afterMap.on('mouseleave', 'places', function() {
+afterMap.getCanvas().style.cursor = '';
+popup.remove();
+});
+});
+</script>
+
+
+</body></html>
